@@ -13,7 +13,7 @@ jobs:
         id: vars
         run: echo "tag=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
       
-      - name: Publish
+      - name: Publish current tag
         uses: dinushchathurya/build-tag-push-action@v1.2.1
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
@@ -24,3 +24,11 @@ jobs:
           repository:  multiplicator
           tag: ${{ steps.vars.outputs.tag }}
           
+      - name: Update latest tag
+        uses: airbone95/dockerhub-retag
+        with:
+          dockerhub_username: ${{ secrets.DOCKER_USERNAME }}
+          dockerhub_password: ${{ secrets.DOCKER_PASSWORD }}
+          dockerhub_repo: ${{ secrets.DOCKER_USERNAME }}/multiplicator
+          old_tag: ${{ steps.vars.outputs.tag }}
+          new_tag: latest
