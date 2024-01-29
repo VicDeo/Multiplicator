@@ -8,8 +8,10 @@ jobs:
   docker-build:
     runs-on: ubuntu-latest
     steps:
-      - name: Get version
+      - name: Clone sources
         uses: actions/checkout@v4
+    
+      - name: Get version
         id: vars
         run: echo "tag=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
       
