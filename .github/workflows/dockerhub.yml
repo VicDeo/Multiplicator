@@ -25,7 +25,7 @@ jobs:
           tag: ${{ steps.vars.outputs.tag }}
           
       - name: Update latest tag
-        uses: airbone95/dockerhub-retag
+        uses: airbone95/dockerhub-retag@v0.5
         with:
           dockerhub_username: ${{ secrets.DOCKER_USERNAME }}
           dockerhub_password: ${{ secrets.DOCKER_PASSWORD }}
